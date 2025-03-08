@@ -1,0 +1,225 @@
+<div
+  class="set-user-info"
+  *ngIf="userData == null && currentRoute == '/change-user-data'"
+>
+  <form [formGroup]="userDataForm" (ngSubmit)="onSubmit()">
+    <div>
+      <div class="form-group">
+        <input
+          class="text-input"
+          formControlName="name"
+          required
+          [ngClass]="{
+            'valid-border':
+              userDataForm.get('name')?.valid &&
+              userDataForm.get('name')?.touched,
+            'invalid-border':
+              userDataForm.get('name')?.invalid &&
+              userDataForm.get('name')?.touched
+          }"
+          placeholder="Введите имя"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          class="text-input"
+          formControlName="nickname"
+          placeholder="Введите никнейм"
+          required
+          [ngClass]="{
+            'valid-border':
+              userDataForm.get('nickname')?.valid &&
+              userDataForm.get('nickname')?.touched,
+            'invalid-border':
+              userDataForm.get('nickname')?.invalid &&
+              userDataForm.get('nickname')?.touched
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          formControlName="surname"
+          placeholder="Введите фамилию"
+          required
+          class="text-input"
+          [ngClass]="{
+            'valid-border':
+              userDataForm.get('surname')?.valid &&
+              userDataForm.get('surname')?.touched,
+            'invalid-border':
+              userDataForm.get('surname')?.invalid &&
+              userDataForm.get('surname')?.touched
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          class="text-input"
+          formControlName="weight"
+          placeholder="Введите ваш вес (кг)"
+          required
+          [ngClass]="{
+            'valid-border':
+              userDataForm.get('weight')?.valid &&
+              userDataForm.get('weight')?.touched,
+            'invalid-border':
+              userDataForm.get('weight')?.invalid &&
+              userDataForm.get('weight')?.touched
+          }"
+        />
+      </div>
+    </div>
+
+    <div>
+      <div class="form-group">
+        <input
+          class="text-input"
+          formControlName="height"
+          placeholder="Введите ваш рост (см)"
+          required
+          [ngClass]="{
+            'valid-border':
+              userDataForm.get('height')?.valid &&
+              userDataForm.get('height')?.touched,
+            'invalid-border':
+              userDataForm.get('height')?.invalid &&
+              userDataForm.get('height')?.touched
+          }"
+        />
+      </div>
+      <div class="form-group__raw">
+        <mat-form-field appearance="fill" class="date-input-container">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Выберите дату рождения"
+            formControlName="age"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill" class="date-input-container">
+        <mat-select formControlName="gender" required>
+          <mat-option value="">Выберите пол</mat-option>
+          <mat-option value="male">М</mat-option>
+          <mat-option value="female">Ж</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-group__file">
+        <label>Добавьте аватар</label>
+        <input type="file" (change)="onImageChange($event)" accept="image/*" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button
+        *ngIf="userDataForm.valid"
+        type="submit"
+        class="btn-submit"
+        mat-flat-button
+      >
+        Добавить данные
+      </button>
+      <span *ngIf="userDataForm.invalid" class="warn-msg"
+        >Если всё заполнили, то тут будет кнопка</span
+      >
+    </div>
+  </form>
+</div>
+
+<div class="set-user-info" *ngIf="userData != null">
+  <form [formGroup]="userDataForm" (ngSubmit)="onSubmit()">
+    <div>
+      <div class="form-group">
+        <label for="name">Имя</label>
+        <input
+          class="text-input"
+          formControlName="name"
+          required
+          [placeholder]="userData.name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="nickname">Никнейм</label>
+        <input
+          class="text-input"
+          formControlName="nickname"
+          [placeholder]="userData.nickname"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="surname">Фамилия</label>
+        <input
+          formControlName="surname"
+          [placeholder]="userData.surname"
+          required
+          class="text-input"
+        />
+      </div>
+      <div class="form-group">
+        <label for="weight">Вес (кг)</label>
+        <input
+          class="text-input"
+          formControlName="weight"
+          [placeholder]="userData.weight"
+          required
+        />
+      </div>
+    </div>
+
+    <div>
+      <div class="form-group">
+        <label for="height">Рост (см)</label>
+        <input
+          class="text-input"
+          formControlName="height"
+          [placeholder]="userData.height"
+          required
+        />
+      </div>
+      <div class="form-group__raw">
+        <mat-form-field appearance="fill" class="date-input-container">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [placeholder]="getFullYear()"
+            formControlName="age"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill" class="date-input-container">
+        <mat-select formControlName="gender" required>
+          <mat-option value="">Изменить пол</mat-option>
+          <mat-option value="male">М</mat-option>
+          <mat-option value="female">Ж</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-group__file">
+        <label>Изменить аватар</label>
+        <input type="file" (change)="onImageChange($event)" accept="image/*" />
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn-submit" mat-flat-button>
+        Сохранить
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>
+<notification [message]="errorMessage"></notification>

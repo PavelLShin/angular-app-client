@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+}
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid rgb(124, 124, 124);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mat-form-field {
+  padding: 10px !important;
+  border-top: 1px solid gray;
+}
+.cdk-live-announcer-element {
+  display: none !important;
+}
+.cdk-overlay-container {
+  position: absolute;
+  text-align: center;
+  top: 55%;
+  left: 50%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: #f3f3f3;
+}
+
+.cdk-overlay-pane,
+#cdk-overlay-0 {
+  transform: translateX(1px) translateY(0px) !important;
+}

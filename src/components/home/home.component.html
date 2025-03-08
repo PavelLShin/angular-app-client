@@ -1,0 +1,50 @@
+<div *ngIf="userData" class="get-user">
+  <div class="get-user-info">
+    <img [src]="getImgPath()" class="user_img" />
+    <div class="get-user-unfo__item">
+      <h1>@{{ userData.nickname }}</h1>
+    </div>
+    <div class="get-user-unfo__item">
+      <h2>{{ userData.name }}</h2>
+    </div>
+    <div class="get-user-unfo__item">
+      <h2>{{ userData.surname }}</h2>
+    </div>
+    <div class="get-user-unfo__item">
+      <h2>Пол: {{ getGender() }}</h2>
+    </div>
+    <div class="get-user-unfo__item">
+      <h2>Возраст: {{ getFullYear() }}</h2>
+    </div>
+    <div class="get-user-unfo__item">
+      <h2>Вес: {{ userData.weight }} кг</h2>
+    </div>
+    <div class="get-user-unfo__item">
+      <h2>Рост: {{ userData.height }} см</h2>
+    </div>
+  </div>
+  <div class="user-data__btn-container">
+    <button class="change-user-data_btn" (click)="onChangeUserData()">
+      Изменить данные пользователя
+    </button>
+    <button class="change-user-data_btn" (click)="onChangeRegistrationData()">
+      Изменить данные авторизации
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!userData">
+  <div class="user-data__btn-container">
+    <button
+      class="change-user-data_btn"
+      (click)="onChangeUserData()"
+      mat-flat-button
+    >
+      Добавить данные пользователя
+    </button>
+  </div>
+  <div class="loader" *ngIf="loaderVisible">
+    <div class="spinner"></div>
+  </div>
+  <notification [message]="errorMessage"></notification>
+</div>

@@ -1,0 +1,122 @@
+<main>
+  <h2>Смена данных для авторизации</h2>
+  <form [formGroup]="changeRegisterDataForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email"> </label>
+      <input
+        formControlName="email"
+        class="email-input"
+        type="text"
+        id="email"
+        [ngClass]="{
+          'valid-border':
+            changeRegisterDataForm.get('email')?.valid &&
+            changeRegisterDataForm.get('email')?.touched,
+          'invalid-border':
+            changeRegisterDataForm.get('email')?.invalid &&
+            changeRegisterDataForm.get('email')?.touched
+        }"
+        placeholder="Введите новый email"
+      />
+      <div
+        class="error"
+        *ngIf="
+          changeRegisterDataForm.get('email')!.invalid &&
+          changeRegisterDataForm.get('email')!.touched
+        "
+      >
+        Email введён не корректно
+      </div>
+    </div>
+    <button
+      type="button"
+      (click)="toggleChangePassword()"
+      *ngIf="!changePassword"
+      mat-flat-button
+      class="btn-reset-password"
+    >
+      Изменить пароль
+    </button>
+    <div *ngIf="changePassword">
+      <div class="form-group">
+        <label for="currentPassword"></label>
+        <div class="input-password-container">
+          <input
+            [type]="passwordIsVisible ? 'text' : 'password'"
+            id="currentPassword"
+            class="input-password"
+            placeholder="Введите текущий пароль"
+            formControlName="currentPassword"
+            [ngClass]="{
+              'valid-border':
+                changeRegisterDataForm.get('currentPassword')?.valid &&
+                changeRegisterDataForm.get('currentPassword')?.touched,
+              'invalid-border':
+                changeRegisterDataForm.get('currentPassword')?.invalid &&
+                changeRegisterDataForm.get('currentPassword')?.touched
+            }"
+          />
+          <div (click)="toggleVisibilePassword()" class="toggle-password-icon">
+            <i
+              [ngClass]="passwordIsVisible ? 'fa fa-eye' : 'fa fa-eye-slash'"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          changeRegisterDataForm.get('currentPassword')!.invalid &&
+          changeRegisterDataForm.get('currentPassword')!.touched
+        "
+      >
+        Пароль должен содержать минимум 5 символов
+      </div>
+      <div class="form-group">
+        <label for="password"></label>
+        <div class="input-password-container">
+          <input
+            [type]="passwordIsVisible ? 'text' : 'password'"
+            id="password"
+            class="input-password"
+            placeholder="Введите новый пароль"
+            formControlName="password"
+            [ngClass]="{
+              'valid-border':
+                changeRegisterDataForm.get('password')?.valid &&
+                changeRegisterDataForm.get('password')?.touched,
+              'invalid-border':
+                changeRegisterDataForm.get('password')?.invalid &&
+                changeRegisterDataForm.get('password')?.touched
+            }"
+          />
+          <div (click)="toggleVisibilePassword()" class="toggle-password-icon">
+            <i
+              [ngClass]="passwordIsVisible ? 'fa fa-eye' : 'fa fa-eye-slash'"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          changeRegisterDataForm.get('password')!.invalid &&
+          changeRegisterDataForm.get('password')!.touched
+        "
+      >
+        Пароль должен содержать минимум 5 символов
+      </div>
+    </div>
+    <div class="form-group">
+      <button
+        *ngIf="changeRegisterDataForm.valid"
+        type="submit"
+        class="btn-submit"
+        mat-flat-button
+      >
+        Сохранить
+      </button>
+    </div>
+  </form>
+</main>
+<notification [message]="errorMessage"></notification>

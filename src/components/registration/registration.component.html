@@ -1,0 +1,154 @@
+<main>
+  <h2>{{ headTxt }}</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email"></label>
+      <input
+        class="email-input"
+        type="text"
+        id="email"
+        formControlName="email"
+        [ngClass]="{
+          'valid-border':
+            registerForm.get('email')?.valid &&
+            registerForm.get('email')?.touched,
+          'invalid-border':
+            registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched
+        }"
+        placeholder="Введите email"
+      />
+      <div
+        class="error"
+        *ngIf="
+          registerForm.get('email')!.invalid &&
+          registerForm.get('email')!.touched
+        "
+      >
+        Email введён не корректно
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password"></label>
+      <div class="input-password-container">
+        <input
+          [type]="passwordIsVisible ? 'text' : 'password'"
+          id="password"
+          formControlName="password"
+          class="input-password"
+          [ngClass]="{
+            'valid-border':
+              registerForm.get('password')?.valid &&
+              registerForm.get('password')?.touched,
+            'invalid-border':
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+          }"
+          placeholder="Введите пароль"
+        />
+        <div (click)="toggleVisibilePassword()" class="toggle-password-icon">
+          <i
+            [ngClass]="passwordIsVisible ? 'fa fa-eye' : 'fa fa-eye-slash'"
+          ></i>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          registerForm.get('password')!.invalid &&
+          registerForm.get('password')!.touched
+        "
+      >
+        Пароль должен содержать минимум 5 символов
+      </div>
+    </div>
+    <div class="form-group" *ngIf="currentRoute == '/registration'">
+      <label for="confirmPassword"></label>
+      <div class="input-password-container">
+        <input
+          [type]="passwordIsVisible ? 'text' : 'password'"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="input-password"
+          [ngClass]="{
+            'valid-border':
+              registerForm.get('confirmPassword')?.valid &&
+              registerForm.get('confirmPassword')?.touched,
+            'invalid-border':
+              registerForm.get('confirmPassword')?.invalid &&
+              registerForm.get('confirmPassword')?.touched
+          }"
+          placeholder="Повторите пароль"
+        />
+        <div (click)="toggleVisibilePassword()" class="toggle-password-icon">
+          <i
+            [ngClass]="passwordIsVisible ? 'fa fa-eye' : 'fa fa-eye-slash'"
+          ></i>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          registerForm.hasError('mismatch') &&
+          (registerForm.get('confirmPassword')?.touched ||
+            registerForm.get('confirmPassword')?.dirty)
+        "
+      >
+        Пароли не совпадают
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          registerForm.get('confirmPassword')?.invalid &&
+          (registerForm.get('confirmPassword')?.touched ||
+            registerForm.get('confirmPassword')?.dirty)
+        "
+      >
+        <div *ngIf="registerForm.get('confirmPassword')?.errors?.required">
+          Подтверждение пароля обязательно
+        </div>
+      </div>
+    </div>
+    <section class="btn-section">
+      <div class="btn-navigate" *ngIf="currentRoute == '/registration'">
+        <button
+          mat-flat-button
+          type="submit"
+          class="btn-submit"
+          *ngIf="registerForm.valid"
+        >
+          Регистрация
+        </button>
+        <button mat-flat-button (click)="routerBtn()" class="btn-route">
+          Уже есть аккаунт?
+        </button>
+      </div>
+      <div class="btn-navigate" *ngIf="currentRoute == '/auth'">
+        <button
+          mat-flat-button
+          type="submit"
+          class="btn-submit"
+          *ngIf="registerForm.valid"
+        >
+          Авторизация
+        </button>
+        <button mat-flat-button (click)="routerBtn()" class="btn-route">
+          Нет аккаунта?
+        </button>
+      </div>
+    </section>
+  </form>
+  <button
+    mat-flat-button
+    (click)="resetBtn()"
+    class="btn-reset-password"
+    *ngIf="currentRoute == '/auth'"
+  >
+    Забыли пароль?
+  </button>
+  <notification [message]="errorMessage"></notification>
+  <div class="loader" *ngIf="loaderVisible">
+    <div class="spinner"></div>
+  </div>
+</main>
