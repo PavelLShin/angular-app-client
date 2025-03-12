@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
   public passwordIsVisible: boolean = false;
   public errorMessage: string = '';
   public loaderVisible: boolean = false;
+  public bgColorNotification!: string;
 
   constructor(
     public fb: FormBuilder,
@@ -76,6 +77,7 @@ export class RegistrationComponent implements OnInit {
           },
           error: (error) => {
             this.registerForm.reset();
+            this.bgColorNotification = 'error';
             this.errorMessage = error.error.message;
             setTimeout(() => {
               this.errorMessage = '';
@@ -104,6 +106,7 @@ export class RegistrationComponent implements OnInit {
           },
           error: (error) => {
             this.registerForm.reset();
+            this.bgColorNotification = 'error';
             this.errorMessage = error.error.message;
             setTimeout(() => {
               this.errorMessage = '';

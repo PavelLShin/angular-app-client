@@ -14,9 +14,8 @@ import {
 export class NotoficationComponent implements OnInit {
   @Input() message: string = '';
   @Input() duration: number = 3000;
+  @Input() bgColor!: string;
   public isVisible: boolean = false;
-
-  private timeoutId: any;
 
   ngOnInit(): void {
     if (this.message) {
@@ -24,9 +23,16 @@ export class NotoficationComponent implements OnInit {
     }
   }
 
+  getColor(): string {
+    return this.bgColor == 'error' ? 'error' : 'success';
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['message'] && changes['message'].currentValue) {
       this.showNotification();
+    }
+    if (changes['bgColor'] && changes['bgColor'].currentValue) {
+      this.getColor();
     }
   }
 

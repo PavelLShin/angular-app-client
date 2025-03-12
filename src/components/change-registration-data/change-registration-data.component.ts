@@ -24,6 +24,7 @@ export class ChangeRegistrationDataComponent implements OnInit {
   public userId!: string | null;
   public errorMessage: string = '';
   private destroy$: Subject<void> = new Subject<void>();
+  public bgColorNotification!: string;
 
   constructor(
     public fb: FormBuilder,
@@ -78,6 +79,7 @@ export class ChangeRegistrationDataComponent implements OnInit {
       .subscribe({
         next: () => {
           this.errorMessage = 'Успешно!';
+          this.bgColorNotification = 'success';
           setTimeout(() => {
             this.errorMessage = '';
             this.route.navigate(['/']);
@@ -85,6 +87,7 @@ export class ChangeRegistrationDataComponent implements OnInit {
         },
         error: (error) => {
           this.errorMessage = error.error.message;
+          this.bgColorNotification = 'error';
           setTimeout(() => {
             this.errorMessage = '';
           }, 3000);

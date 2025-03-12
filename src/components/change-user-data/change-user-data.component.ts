@@ -19,6 +19,7 @@ export class ChangeUserDataComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
   public loaderVisible: boolean = false;
   public currentRoute!: string;
+  public bgColorNotification!: string;
 
   constructor(
     public userDataService: UserDataService,
@@ -74,12 +75,18 @@ export class ChangeUserDataComponent implements OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
-            this.userDataForm.reset();
-            this.getUserInfo(this.userId);
-            this.route.navigate(['/']);
+            this.errorMessage = 'Успешно';
+            this.bgColorNotification = 'success';
+            setTimeout(() => {
+              this.userDataForm.reset();
+              this.getUserInfo(this.userId);
+              this.route.navigate(['/']);
+              this.errorMessage = '';
+            }, 1000);
           },
           error: (error) => {
             this.errorMessage = error.error.message;
+            this.bgColorNotification = 'error';
             setTimeout(() => {
               this.errorMessage = '';
             }, 3000);
@@ -94,12 +101,19 @@ export class ChangeUserDataComponent implements OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: () => {
-            this.userDataForm.reset();
-            this.getUserInfo(this.userId);
-            this.route.navigate(['/']);
+            this.errorMessage = 'Успешно';
+            this.bgColorNotification = 'success';
+            setTimeout(() => {
+              this.errorMessage = '';
+              this.userDataForm.reset();
+              this.getUserInfo(this.userId);
+              this.route.navigate(['/']);
+            }, 1000);
           },
+
           error: (error) => {
             this.errorMessage = error.error.message;
+            this.bgColorNotification = 'red';
             setTimeout(() => {
               this.errorMessage = '';
             }, 3000);

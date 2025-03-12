@@ -2,7 +2,6 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #cc0e00;
   color: white;
   padding: 16px;
   border-radius: 4px;
@@ -11,4 +10,12 @@
   width: 200px;
   min-height: 12px;
   text-align: center;
+}
+
+.success {
+  background-color: green;
+}
+
+.error {
+  background-color: red;
 }

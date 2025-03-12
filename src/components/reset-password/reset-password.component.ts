@@ -20,6 +20,7 @@ export class ResetPasswordComponent implements OnInit {
   public errorMessage: string = '';
   public userId!: number;
   private destroy$: Subject<void> = new Subject<void>();
+  public bgColorNotification!: string;
 
   constructor(
     public fb: FormBuilder,
@@ -59,12 +60,14 @@ export class ResetPasswordComponent implements OnInit {
           this.userId = data;
           this.visibleCode = true;
           this.errorMessage = '1111';
+          this.bgColorNotification = 'succsess';
           setTimeout(() => {
             this.errorMessage = '';
           }, 3000);
         },
         error: (error) => {
           this.errorMessage = error.error.message;
+          this.bgColorNotification = 'error';
           setTimeout(() => {
             this.errorMessage = '';
           }, 3000);
@@ -87,6 +90,7 @@ export class ResetPasswordComponent implements OnInit {
   getCode(): void {
     if (this.code != '1111') {
       this.errorMessage = 'Код введён не верно';
+      this.bgColorNotification = 'error';
       setTimeout(() => {
         this.errorMessage = '';
       }, 3000);
@@ -105,6 +109,7 @@ export class ResetPasswordComponent implements OnInit {
       .subscribe({
         next: () => {
           this.errorMessage = 'Успешно!';
+          this.bgColorNotification = 'success';
           setTimeout(() => {
             this.errorMessage = '';
             this.route.navigate(['/auth']);

@@ -147,7 +147,10 @@
   >
     Забыли пароль?
   </button>
-  <notification [message]="errorMessage"></notification>
+  <notification
+    [message]="errorMessage"
+    [bgColor]="bgColorNotification"
+  ></notification>
   <div class="loader" *ngIf="loaderVisible">
     <div class="spinner"></div>
   </div>
