@@ -1,0 +1,107 @@
+<main>
+  <section class="set-type-container">
+    <h2>Добавить новый тип</h2>
+    <form [formGroup]="setExerciseTypeForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="tittle"></label>
+        <div class="input-tittle-container">
+          <input
+            type="text"
+            id="tittle"
+            formControlName="tittle"
+            class="input-tittle"
+            [ngClass]="{
+              'valid-border':
+                setExerciseTypeForm.get('tittle')?.valid &&
+                setExerciseTypeForm.get('tittle')?.touched,
+              'invalid-border':
+                setExerciseTypeForm.get('tittle')?.invalid &&
+                setExerciseTypeForm.get('tittle')?.touched
+            }"
+            placeholder="Введите новый тип"
+          />
+        </div>
+      </div>
+      <section class="btn-section">
+        <button
+          mat-flat-button
+          type="submit"
+          class="btn-submit"
+          *ngIf="setExerciseTypeForm.valid"
+        >
+          Добавить
+        </button>
+      </section>
+    </form>
+  </section>
+  <section>
+    <h2>Упражнения</h2>
+    <form
+      [formGroup]="createExerciseForm"
+      (ngSubmit)="onSubmitExercise()"
+      class="exercise_form__container"
+    >
+      <div class="form-group">
+        <label for="name">Название</label>
+        <input
+          [ngClass]="{
+            'valid-border':
+              createExerciseForm.get('name')?.valid &&
+              createExerciseForm.get('name')?.touched,
+            'invalid-border':
+              createExerciseForm.get('name')?.invalid &&
+              createExerciseForm.get('name')?.touched
+          }"
+          formControlName="name"
+          required
+          placeholder="Название упражнения"
+        />
+      </div>
+      <div class="form-group">
+        <label for="info">Информация</label>
+        <input
+          [ngClass]="{
+            'valid-border':
+              createExerciseForm.get('info')?.valid &&
+              createExerciseForm.get('info')?.touched,
+            'invalid-border':
+              createExerciseForm.get('info')?.invalid &&
+              createExerciseForm.get('info')?.touched
+          }"
+          formControlName="info"
+          placeholder="Информация"
+          required
+        />
+      </div>
+      <mat-form-field appearance="fill" class="type-input-container">
+        <h3>Выберете тип упражнения</h3>
+        <mat-select formControlName="typeId" required>
+          <mat-option *ngFor="let type of exerciseType" [value]="type.id">{{
+            type.tittle
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-group__file">
+        <label>Добавить изображение</label>
+        <input type="file" (change)="onImageChange($event)" accept="image/*" />
+      </div>
+      <div class="form-group">
+        <button
+          *ngIf="createExerciseForm.valid"
+          type="submit"
+          class="btn-submit"
+          mat-flat-button
+        >
+          Сохранить
+        </button>
+      </div>
+    </form>
+  </section>
+  <notification
+    [message]="errorMessage"
+    [bgColor]="bgColorNotification"
+  ></notification>
+  <div class="loader" *ngIf="loaderVisible">
+    <div class="spinner"></div>
+  </div>
+</main>

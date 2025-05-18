@@ -35,7 +35,14 @@ nav {
 
 .nav-list a,
 .nav-exit a {
-  color: white;
+  color: rgb(165, 165, 165);
+  transition: 0.5s all;
+}
+
+.nav-list a:hover,
+.nav-exit a:hover {
+  color: rgb(255, 255, 255) !important;
+  transition: 0.5s all;
 }
 
 .nav-exit {
@@ -49,6 +56,11 @@ nav {
 body {
   width: 100%;
   height: 100%;
-  background-image: url("../assets/icons/photo_2025-03-12_20-18-36.jpg");
+  background-image: url("../assets/icons/snapedit_1746792249367.jpg");
   background-size: cover;
+}
+
+.active-link {
+  color: rgb(255, 255, 255) !important;
+  transition: 0.5s all;
 }

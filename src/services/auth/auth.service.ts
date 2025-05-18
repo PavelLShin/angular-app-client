@@ -27,11 +27,13 @@ export class AuthService {
     return this.http.post(`${API_URL}/user/change-password`, data);
   }
 
-  resetPassword(data: IUserIdPasswordData): Observable<Object> {
+  resetPassword(data: IUserIdPasswordData<number>): Observable<Object> {
     return this.http.patch(`${API_URL}/user/change-password`, data);
   }
 
-  changeRegistrationData(data: IUserIdPasswordEmailData): Observable<Object> {
+  changeRegistrationData(
+    data: IUserIdPasswordEmailData<string | null>
+  ): Observable<Object> {
     return this.http.patch(`${API_URL}/user/change-registration-data`, data);
   }
 

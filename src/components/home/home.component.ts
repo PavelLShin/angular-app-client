@@ -87,6 +87,10 @@ export class HomeComponent implements OnInit {
     this.route.navigate(['/change-registration-data']);
   }
 
+  onUserTraning(): void {
+    this.route.navigate([`user-traning/${this.userId}`]);
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

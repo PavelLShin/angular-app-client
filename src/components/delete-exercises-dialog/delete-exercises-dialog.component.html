@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Удалить тип и все упражнения?</h2>
+<mat-dialog-content>
+  <p>При удалении типа, все упражнения этого типа удаляются автоматически</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button class="btn-close" (click)="onCancel()">Отмена</button>
+  <button
+    mat-flat-button
+    class="btn-submit"
+    (click)="onConfirm()"
+    cdkFocusInitial
+  >
+    Подтвердить
+  </button>
+</mat-dialog-actions>

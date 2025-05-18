@@ -2,14 +2,13 @@ export interface IUserEmailData {
   email: string;
 }
 
-export interface IUserIdPasswordData {
-  id: number;
+export interface IUserIdPasswordData<T> {
+  id: T;
   password: string;
 }
 
-export interface IUserIdPasswordEmailData {
-  id: string | null;
-  password: string;
+export interface IUserIdPasswordEmailData<T>
+  extends IUserEmailData,
+    IUserIdPasswordData<T> {
   currentPassword: string;
-  email: string;
 }

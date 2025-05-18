@@ -10,9 +10,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChangeUserDataComponent } from 'src/components/change-user-data/change-user-data.component';
 import { ResetPasswordComponent } from 'src/components/reset-password/reset-password.component';
 import { ChangeRegistrationDataComponent } from 'src/components/change-registration-data/change-registration-data.component';
+import { TypeConfigurableComponent } from 'src/components/type-configurable/type-configurable.component';
+import { ExerciseConfigurationComponent } from 'src/components/exercise-configuration/exercise-configuration.component';
+import { ExerciseInfoComponent } from 'src/components/exercise-info/exercise-info.component';
+import { UserExerciseComponent } from 'src/components/user-exercise/user-exercise.component';
+import { UserExerciseInfoComponent } from 'src/components/user-exercise-info/user-exercise-info.component';
+import { UserExerciseSettingsComponent } from 'src/components/user-exercise-settings/user-exercise-settings.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'change-user-data',
     component: ChangeUserDataComponent,
@@ -29,6 +35,24 @@ const routes: Routes = [
   { path: 'progress', component: ProgressComponent, canActivate: [AuthGuard] },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'registration', component: RegistrationComponent },
+  { path: 'configurable', component: TypeConfigurableComponent },
+  {
+    path: 'exercise-configuration/:id',
+    component: ExerciseConfigurationComponent,
+  },
+  {
+    path: 'exercise-info/:id',
+    component: ExerciseInfoComponent,
+  },
+  {
+    path: 'user-exercise-info/:id',
+    component: UserExerciseInfoComponent,
+  },
+  {
+    path: 'user-exercise-settings/:id',
+    component: UserExerciseSettingsComponent,
+  },
+  { path: 'user-traning/:id', component: UserExerciseComponent },
   { path: '**', component: RegistrationComponent },
 ];
 

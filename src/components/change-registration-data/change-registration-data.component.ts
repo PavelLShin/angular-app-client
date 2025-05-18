@@ -20,7 +20,7 @@ export class ChangeRegistrationDataComponent implements OnInit {
   public changeRegisterDataForm!: FormGroup;
   public passwordIsVisible: boolean = false;
   public changePassword: boolean = false;
-  public userRegisterData!: IUserIdPasswordEmailData;
+  public userRegisterData!: IUserIdPasswordEmailData<string | null>;
   public userId!: string | null;
   public errorMessage: string = '';
   private destroy$: Subject<void> = new Subject<void>();
@@ -82,7 +82,7 @@ export class ChangeRegistrationDataComponent implements OnInit {
           this.bgColorNotification = 'success';
           setTimeout(() => {
             this.errorMessage = '';
-            this.route.navigate(['/']);
+            this.route.navigate(['/home']);
           }, 1000);
         },
         error: (error) => {

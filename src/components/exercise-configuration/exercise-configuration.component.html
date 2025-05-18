@@ -1,0 +1,74 @@
+<main>
+  <section *ngIf="exerciseData">
+    <div class="exercise-card-header">
+      <img
+        [src]="getImgPath()"
+        class="exercise_img"
+        width="50px"
+        height="50px"
+      />
+    </div>
+    <form
+      [formGroup]="changeExerciseForm"
+      (ngSubmit)="onSubmitChangeExercise()"
+      class="exercise_form__container"
+    >
+      <div class="form-group">
+        <label for="name">Название</label>
+        <input
+          [ngClass]="{
+            'valid-border':
+              changeExerciseForm.get('name')?.valid &&
+              changeExerciseForm.get('name')?.touched,
+            'invalid-border':
+              changeExerciseForm.get('name')?.invalid &&
+              changeExerciseForm.get('name')?.touched
+          }"
+          formControlName="name"
+          required
+          [placeholder]="exerciseData.name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="info">Информация</label>
+        <input
+          [ngClass]="{
+            'valid-border':
+              changeExerciseForm.get('info')?.valid &&
+              changeExerciseForm.get('info')?.touched,
+            'invalid-border':
+              changeExerciseForm.get('info')?.invalid &&
+              changeExerciseForm.get('info')?.touched
+          }"
+          formControlName="info"
+          [placeholder]="exerciseData.info"
+          required
+        />
+      </div>
+      <mat-form-field appearance="fill" class="type-input-container">
+        <h3>Выберете тип упражнения</h3>
+        <mat-select formControlName="typeId" required>
+          <mat-option *ngFor="let type of exerciseType" [value]="type.id">{{
+            type.tittle
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-group__file">
+        <label>Добавить изображение</label>
+        <input type="file" (change)="onImageChange($event)" accept="image/*" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn-submit" mat-flat-button>
+          Сохранить
+        </button>
+      </div>
+    </form>
+  </section>
+  <notification
+    [message]="errorMessage"
+    [bgColor]="bgColorNotification"
+  ></notification>
+  <div class="loader" *ngIf="loaderVisible">
+    <div class="spinner"></div>
+  </div>
+</main>

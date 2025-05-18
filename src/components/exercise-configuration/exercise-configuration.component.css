@@ -1,0 +1,74 @@
+main {
+  margin-top: 5px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.exercise-card-header {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exercise_form__container {
+  width: 400px;
+  min-height: 100px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid rgb(124, 124, 124);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 350px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.form-group__file {
+  text-align: center;
+}
+input {
+  border: 1px solid rgb(124, 124, 124);
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.valid-border {
+  border: 2px solid green;
+}
+
+.invalid-border {
+  border: 2px solid red;
+}
+
+.btn-submit {
+  background-color: green;
+  color: white;
+}

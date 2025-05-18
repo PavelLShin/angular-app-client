@@ -1,5 +1,5 @@
 <body>
-  <header *ngIf="login">
+  <header *ngIf="login" [ngClass]="{ 'block-background': isDialogOpen }">
     <div class="logo-container">
       <img
         src="../assets/icons/logo-header.png"
@@ -10,16 +10,16 @@
     <nav>
       <ul class="nav-list">
         <li>
-          <a routerLink="">Мой дом</a>
+          <a routerLink="/home" routerLinkActive="active-link">Мой дом</a>
         </li>
         <li>
-          <a routerLink="/exercise">Выбор упражнения</a>
+          <a routerLink="/exercise" routerLinkActive="active-link">Упражения</a>
         </li>
         <li>
-          <a routerLink="/calendar">Календарь</a>
+          <a routerLink="/calendar" routerLinkActive="active-link">Календарь</a>
         </li>
         <li>
-          <a routerLink="/progress">Прогресс</a>
+          <a routerLink="/progress" routerLinkActive="active-link">Прогресс</a>
         </li>
       </ul>
     </nav>

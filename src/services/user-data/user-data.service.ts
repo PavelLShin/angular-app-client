@@ -10,6 +10,14 @@ import { IUserProfileData } from 'src/interfaces/user_data/IUserProfileData';
 export class UserDataService {
   constructor(private http: HttpClient) {}
 
+  getUserById(id: string | null): Observable<Object> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get(`${API_URL}/user/${id}`, { headers });
+  }
+
   getUserData(id: string | null): Observable<Object> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({

@@ -1,0 +1,50 @@
+main {
+  margin-top: 5px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+h2 {
+  color: rgb(140, 140, 140);
+  font-size: 30px;
+}
+
+.exercise-info-container {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.exercise-card-header {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exercise_img {
+  width: 400px;
+  height: 400px;
+  border-radius: 15%;
+}
+
+.exercise-card-info {
+  width: 30%;
+  height: 400px;
+  border-radius: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  opacity: 0.9;
+  background-color: rgb(100, 100, 100);
+}

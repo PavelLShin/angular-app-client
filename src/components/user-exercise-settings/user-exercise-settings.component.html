@@ -1,0 +1,67 @@
+<main class="main" *ngIf="exerciseDayData">
+  <h2>{{ exerciseDayData.tittle }}</h2>
+  <div class="exercise_type__container">
+    <div class="type-content-container">
+      <section class="type-container-slider">
+        <div class="type-configuration-container">
+          <div
+            *ngFor="let type of exerciseType"
+            class="exercise-type-item"
+            [style.transform]="'translateY(-' + currentTypeIndex * 100 + '%)'"
+            (click)="borderColorType(type.tittle, type.id)"
+            [class.borderLight]="colorBorderType === type.tittle"
+          >
+            <h2>{{ type.tittle }}</h2>
+          </div>
+        </div>
+      </section>
+      <div class="type-navigation">
+        <div class="next" (click)="nextType()">❯</div>
+        <div class="prev" (click)="prevType()">❮</div>
+      </div>
+    </div>
+    <div class="exercise-content-container">
+      <section class="exercise-container-slider">
+        <div class="exercise-configuration-container">
+          <div
+            (click)="changeUserExercise(exercise.id, exercise.name)"
+            *ngFor="let exercise of exercises"
+            class="exercise-item"
+            [class.borderLight]="compareExercise(exercise.id)"
+            [style.transform]="
+              'translateY(-' + currentExerciseIndex * 100 + '%)'
+            "
+          >
+            <h2>{{ exercise.name }}</h2>
+            <span class="icons-container">
+              <span
+                class="material-icons icon-settings"
+                (click)="exerciseInfoRoute(exercise.id)"
+                >info</span
+              >
+              <span
+                class="material-symbols-outlined icon_checked"
+                *ngIf="compareExercise(exercise.id)"
+              >
+                check
+              </span>
+            </span>
+          </div>
+        </div>
+      </section>
+      <div class="exercise-navigation">
+        <div class="next" (click)="nextExercises()">❯</div>
+        <div class="prev" (click)="prevExercises()">❮</div>
+      </div>
+    </div>
+  </div>
+  <button class="save_btn" (click)="save()">Сохранить</button>
+</main>
+
+<notification
+  [message]="errorMessage"
+  [bgColor]="bgColorNotification"
+></notification>
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>

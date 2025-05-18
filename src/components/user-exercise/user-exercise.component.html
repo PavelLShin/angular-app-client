@@ -1,0 +1,81 @@
+<main class="main">
+  <section class="set-traning-container">
+    <h2>Создать тренировку</h2>
+    <form [formGroup]="createUserTraningForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="tittle"></label>
+        <div class="input-tittle-container">
+          <input
+            type="text"
+            id="tittle"
+            formControlName="tittle"
+            class="input-tittle"
+            [ngClass]="{
+              'valid-border':
+                createUserTraningForm.get('tittle')?.valid &&
+                createUserTraningForm.get('tittle')?.touched,
+              'invalid-border':
+                createUserTraningForm.get('tittle')?.invalid &&
+                createUserTraningForm.get('tittle')?.touched
+            }"
+            placeholder="Введите название "
+          />
+        </div>
+      </div>
+      <section class="btn-section">
+        <button
+          mat-flat-button
+          type="submit"
+          class="btn-submit"
+          *ngIf="createUserTraningForm.valid"
+        >
+          Добавить
+        </button>
+      </section>
+    </form>
+  </section>
+  <div class="exercise-content-container">
+    <section class="exercise-container-slider">
+      <div class="exercise-configuration-container">
+        <div
+          *ngFor="let traning of userTranings"
+          class="exercise-item"
+          [style.transform]="'translateY(-' + currentExerciseIndex * 100 + '%)'"
+        >
+          <h2>{{ traning.tittle }}</h2>
+          <span class="icons-container">
+            <span
+              class="material-icons icon-settings"
+              (click)="getUserExerciseInfo(traning.id)"
+              >info</span
+            >
+            <span
+              class="material-icons icon-settings"
+              (click)="getUserExerciseSettings(traning.id)"
+            >
+              settings
+            </span>
+            <span
+              class="material-icons"
+              (click)="deleteUserTraning(traning.id)"
+            >
+              delete
+            </span>
+          </span>
+        </div>
+      </div>
+    </section>
+    <div class="exercise-navigation">
+      <div class="next" (click)="nextExercises()">❯</div>
+      <div class="prev" (click)="prevExercises()">❮</div>
+    </div>
+  </div>
+</main>
+
+<notification
+  [message]="errorMessage"
+  [bgColor]="bgColorNotification"
+></notification>
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>

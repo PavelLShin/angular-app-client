@@ -1,1 +1,76 @@
-<p>exercise works!</p>
+<main [ngClass]="{ 'block-background': isDialogOpen }">
+  <div class="type-content-container">
+    <section class="type-container-slider">
+      <div class="type-configuration-container">
+        <div
+          *ngFor="let type of exerciseType"
+          class="exercise-type-item"
+          [style.transform]="'translateY(-' + currentTypeIndex * 100 + '%)'"
+          (click)="borderColorType(type.tittle, type.id)"
+          [class.borderLight]="colorBorderType === type.tittle"
+        >
+          <h2>{{ type.tittle }}</h2>
+          <span *ngIf="userRole == 'ADMIN'">
+            <span class="material-icons" (click)="deleteExerciseType(type.id)">
+              delete
+            </span>
+          </span>
+        </div>
+      </div>
+    </section>
+    <div class="type-navigation">
+      <div class="next" (click)="nextType()">❯</div>
+      <div class="prev" (click)="prevType()">❮</div>
+    </div>
+    <button
+      *ngIf="userRole == 'ADMIN'"
+      class="change-user-data_btn"
+      mat-flat-button
+      (click)="typeConfugurableRoute()"
+    >
+      Добавить упражнения
+    </button>
+  </div>
+  <div class="exercise-content-container">
+    <section class="exercise-container-slider">
+      <div class="exercise-configuration-container">
+        <div
+          *ngFor="let exercise of exercises"
+          class="exercise-item"
+          [style.transform]="'translateY(-' + currentExerciseIndex * 100 + '%)'"
+        >
+          <h2>{{ exercise.name }}</h2>
+          <span
+            *ngIf="userRole == 'ADMIN'; else userBlock"
+            class="icons-container"
+          >
+            <span
+              class="material-icons icon-settings"
+              (click)="exerciseConfigurationRoute(exercise.id)"
+            >
+              settings
+            </span>
+            <span class="material-icons" (click)="deleteExercise(exercise.id)">
+              delete
+            </span>
+          </span>
+          <ng-template #userBlock>
+            <span
+              class="material-icons icon-settings"
+              (click)="exerciseInfoRoute(exercise.id)"
+              >info</span
+            >
+          </ng-template>
+        </div>
+      </div>
+    </section>
+    <div class="exercise-navigation">
+      <div class="next" (click)="nextExercises()">❯</div>
+      <div class="prev" (click)="prevExercises()">❮</div>
+    </div>
+  </div>
+  <div class="loader" *ngIf="loaderVisible">
+    <div class="spinner"></div>
+  </div>
+  <notification [message]="errorMessage"></notification>
+</main>

@@ -77,3 +77,30 @@ body {
 form {
   background-color: #474747;
 }
+
+.cdk-overlay-container {
+  position: fixed;
+  text-align: center;
+  top: 55%;
+  left: 30%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: #b7b7b7;
+  z-index: 1000;
+}
+
+.mat-dialog-actions {
+  padding: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 52px;
+  align-items: center;
+  box-sizing: content-box;
+  margin-bottom: -24px;
+}
+
+.block-background {
+  pointer-events: none;
+  opacity: 0.5;
+}

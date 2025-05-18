@@ -23,28 +23,36 @@
       <h2>Рост: {{ userData.height }} см</h2>
     </div>
   </div>
-  <div class="user-data__btn-container">
-    <button class="change-user-data_btn" (click)="onChangeUserData()">
-      Изменить данные пользователя
-    </button>
-    <button class="change-user-data_btn" (click)="onChangeRegistrationData()">
-      Изменить данные авторизации
-    </button>
+
+  <div class="user-configuration__container">
+    <div class="user-exercise__info">
+      <section class="user-exercise__info-item">
+        <div class="user-exercise-section__item" (click)="onUserTraning()">
+          <span class="material-symbols-outlined my_traning">
+            fitness_center
+          </span>
+          Мои тренировки
+        </div>
+        <div class="user-exercise-section__item"></div>
+      </section>
+      <section class="user-exercise__info-item">
+        <div class="user-exercise-section__item"></div>
+        <div class="user-exercise-section__item"></div>
+      </section>
+    </div>
+    <div class="user-data__btn-container">
+      <div class="user_traning"></div>
+      <button class="change-user-data_btn" (click)="onChangeUserData()">
+        Изменить данные пользователя
+      </button>
+      <button class="change-user-data_btn" (click)="onChangeRegistrationData()">
+        Изменить данные авторизации
+      </button>
+    </div>
   </div>
 </div>
 
-<div *ngIf="!userData">
-  <div class="user-data__btn-container">
-    <button
-      class="change-user-data_btn"
-      (click)="onChangeUserData()"
-      mat-flat-button
-    >
-      Добавить данные пользователя
-    </button>
-  </div>
-  <div class="loader" *ngIf="loaderVisible">
-    <div class="spinner"></div>
-  </div>
-  <notification [message]="errorMessage"></notification>
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
 </div>
+<notification [message]="errorMessage"></notification>

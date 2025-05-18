@@ -1,0 +1,15 @@
+<main *ngIf="exerciseData">
+  <h2>{{ exerciseData.name }}</h2>
+  <div class="exercise-info-container">
+    <div class="exercise-card-header">
+      <img [src]="getImgPath()" class="exercise_img" />
+    </div>
+    <div class="exercise-card-info">
+      <h3>{{ exerciseData.info }}</h3>
+    </div>
+  </div>
+</main>
+
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>
