@@ -64,3 +64,7 @@ body {
   color: rgb(255, 255, 255) !important;
   transition: 0.5s all;
 }
+
+a {
+  cursor: pointer;
+}

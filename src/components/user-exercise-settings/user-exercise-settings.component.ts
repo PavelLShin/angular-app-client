@@ -75,7 +75,7 @@ export class UserExerciseSettingsComponent implements OnInit {
     } else {
       this.exerciseUser.push({
         name: name,
-        userExerciseDayId: this.exerciseDayId,
+        userExerciseDayId: Number(this.exerciseDayId),
         exerciseId: id,
       });
     }
@@ -83,7 +83,7 @@ export class UserExerciseSettingsComponent implements OnInit {
 
   createUserExercise(
     name: string | null,
-    userExerciseDayId: string | null,
+    userExerciseDayId: number | null,
     exerciseId: number | null
   ): void {
     this.loaderVisible = true;
@@ -121,31 +121,26 @@ export class UserExerciseSettingsComponent implements OnInit {
       });
   }
 
-  async save(): Promise<void> {
-    await this.deleteUserExercise(this.exerciseDayId);
-
-    const promises = this.exerciseUser.map(async (el) => {
-      await this.createUserExercise(
-        el.name,
-        el.userExerciseDayId,
-        el.exerciseId
-      );
-    });
-
+  async save() {
     try {
-      await Promise.all(promises);
-      this.errorMessage = 'Успешно';
-      this.bgColorNotification = 'success';
+      await this.deleteUserExercise(this.exerciseDayId);
+      for (const el of this.exerciseUser) {
+        await this.createUserExercise(
+          el.name,
+          el.userExerciseDayId,
+          el.exerciseId
+        );
+        this.errorMessage = 'Успешно';
+        this.bgColorNotification = 'success';
+        setTimeout(() => {
+          this.route.navigate([`/user-exercise-info/${this.exerciseDayId}`]);
+          this.errorMessage = '';
+        }, 1000);
+      }
     } catch (error) {
-      console.error('Ошибка при сохранении упражнений:', error);
       this.errorMessage = 'Ошибка при сохранении данных';
       this.bgColorNotification = 'error';
     }
-
-    setTimeout(() => {
-      this.route.navigate([`/user-exercise-info/${this.exerciseDayId}`]);
-      this.errorMessage = '';
-    }, 1000);
   }
 
   compareExercise(id: number | null): boolean {

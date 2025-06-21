@@ -16,6 +16,10 @@ import { ExerciseInfoComponent } from 'src/components/exercise-info/exercise-inf
 import { UserExerciseComponent } from 'src/components/user-exercise/user-exercise.component';
 import { UserExerciseInfoComponent } from 'src/components/user-exercise-info/user-exercise-info.component';
 import { UserExerciseSettingsComponent } from 'src/components/user-exercise-settings/user-exercise-settings.component';
+import { StartUserTraningComponent } from 'src/components/start-user-traning/start-user-traning.component';
+import { CurrentUserTraningComponent } from 'src/components/current-user-traning/current-user-traning.component';
+import { CurrentUserExerciseComponent } from 'src/components/current-user-exercise/current-user-exercise.component';
+import { ResultTraningComponent } from 'src/components/result-traning/result-traning.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -53,6 +57,20 @@ const routes: Routes = [
     component: UserExerciseSettingsComponent,
   },
   { path: 'user-traning/:id', component: UserExerciseComponent },
+  { path: 'start-user-traning/:id', component: StartUserTraningComponent },
+
+  {
+    path: `current-user-traning/:id`,
+    component: CurrentUserTraningComponent,
+  },
+  {
+    path: `current-user-traning/:dayId/:exerciseId/:currentPracticeDay`,
+    component: CurrentUserExerciseComponent,
+  },
+  {
+    path: `user-traning-details/:currentPracticeDay`,
+    component: ResultTraningComponent,
+  },
   { path: '**', component: RegistrationComponent },
 ];
 

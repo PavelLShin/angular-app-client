@@ -176,19 +176,12 @@ h2 {
 
 .user-exercise-section__item:hover {
   transition: 0.5s all;
+  background-color: rgb(185, 136, 0);
+}
+
+.user-exercise-section__item:hover {
+  transition: 0.5s all;
   color: rgb(255, 255, 255);
-}
-
-.material-symbols-outlined {
-  font-size: 60px;
-  font-weight: 400;
-  color: rgba(119, 0, 0, 0.33);
-  transition: 0.5s all;
-}
-
-.user-exercise-section__item:hover > .material-symbols-outlined {
-  color: red;
-  transition: 0.5s all;
 }
 
 .user-data__btn-container {

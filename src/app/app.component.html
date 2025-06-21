@@ -24,8 +24,15 @@
       </ul>
     </nav>
     <div (click)="logout()" class="nav-exit">
-      <a routerLink="/auth">Выход</a>
+      <a>Выход</a>
     </div>
   </header>
   <router-outlet></router-outlet>
 </body>
+
+<app-timer-traning></app-timer-traning>
+
+<notification
+  [message]="errorMessage"
+  [bgColor]="bgColorNotification"
+></notification>

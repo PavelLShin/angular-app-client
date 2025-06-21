@@ -1,0 +1,18 @@
+<main class="main" *ngIf="!!currentUserPracticeData">
+  <div *ngIf="userExerciseDayData" class="sets-container">
+    <h2>Результаты</h2>
+    <div
+      *ngFor="let exercise of userExerciseDayData"
+      class="set-item-container"
+    >
+      <h2>{{ exercise.name }}</h2>
+      <h2>Выполненно подходов: {{ exercise.dataArray?.length }}</h2>
+    </div>
+  </div>
+  <h2>Длительность: {{ traningResult }}</h2>
+  <button class="route_btn" (click)="goBack()">Домой</button>
+</main>
+
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>

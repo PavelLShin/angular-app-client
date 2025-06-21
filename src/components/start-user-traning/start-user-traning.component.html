@@ -1,14 +1,20 @@
-<main class="main" *ngIf="exerciseDayData">
-  <h2>{{ exerciseDayData.tittle }}</h2>
+<main class="main">
+  <h1>Выберите тренировочный день</h1>
   <div class="exercise-content-container">
     <section class="exercise-container-slider">
       <div class="exercise-configuration-container">
         <div
-          *ngFor="let exercise of exerciseUser"
+          *ngFor="let traning of userTranings"
           class="exercise-item"
           [style.transform]="'translateY(-' + currentExerciseIndex * 100 + '%)'"
+          (click)="getCurrentUserTraning(traning.id)"
         >
-          <h2>{{ exercise.name }}</h2>
+          <h2>{{ traning.tittle }}</h2>
+          <span class="icons-container">
+            <span class="material-symbols-outlined icon-start">
+              play_circle
+            </span></span
+          >
         </div>
       </div>
     </section>
@@ -16,12 +22,6 @@
       <div class="next" (click)="nextExercises()">❯</div>
       <div class="prev" (click)="prevExercises()">❮</div>
     </div>
-  </div>
-  <div class="btn-navigation">
-    <button class="nav_btn" (click)="onUserTraning()">К тренировкам</button>
-    <button class="nav_btn" (click)="getUserExerciseSettings()">
-      Добавить упражнения
-    </button>
   </div>
 </main>
 

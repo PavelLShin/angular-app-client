@@ -1,0 +1,100 @@
+<main *ngIf="exerciseData">
+  <h2>{{ exerciseData.name }}</h2>
+  <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="practice"></label>
+      <input
+        class="input-practice"
+        type="number"
+        id="practice"
+        formControlName="practice"
+        [ngClass]="{
+          'valid-border':
+            exerciseForm.get('practice')?.valid &&
+            exerciseForm.get('practice')?.touched,
+          'invalid-border':
+            exerciseForm.get('practice')?.invalid &&
+            exerciseForm.get('practice')?.touched
+        }"
+        placeholder="Повторений"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="weigth"></label>
+      <div class="form-group">
+        <input
+          id="weigth"
+          formControlName="weigth"
+          class="input-weigth"
+          type="number"
+          [ngClass]="{
+            'valid-border':
+              exerciseForm.get('weigth')?.valid &&
+              exerciseForm.get('weigth')?.touched,
+            'invalid-border':
+              exerciseForm.get('weigth')?.invalid &&
+              exerciseForm.get('weigth')?.touched
+          }"
+          placeholder="Вес (кг)"
+        />
+      </div>
+    </div>
+    <button
+      mat-flat-button
+      type="submit"
+      class="btn-submit"
+      *ngIf="exerciseForm.valid && settingItem"
+    >
+      Изменить
+    </button>
+
+    <button
+      mat-flat-button
+      type="submit"
+      class="btn-submit"
+      *ngIf="exerciseForm.valid && !settingItem"
+    >
+      Добавить
+    </button>
+  </form>
+  <div *ngIf="sets.length > 0" class="sets-container">
+    <div *ngFor="let set of sets; let i = index" class="set-item-container">
+      <h2 class="set-item">{{ i + 1 }}</h2>
+      <h2 class="set-data">повт: {{ set.practice }} X {{ set.weigth }} кг</h2>
+      <h3>{{ set.dateExercise | timeFormat }}</h3>
+      <span
+        class="material-symbols-outlined icon-setting"
+        (click)="changeSetsItem(set, i)"
+      >
+        settings
+      </span>
+      <span
+        class="material-symbols-outlined icon-delete"
+        (click)="deleteItem(i)"
+      >
+        delete
+      </span>
+    </div>
+  </div>
+  <div class="btn_container">
+    <button class="back_btn" (click)="goBack()">Назад</button>
+    <button
+      *ngIf="sets.length > 0"
+      class="save_btn"
+      (click)="
+        this.setsApi ? updateUserExercisePractice() : setUserExercisePractice()
+      "
+    >
+      Сохранить
+    </button>
+  </div>
+</main>
+
+<notification
+  [message]="errorMessage"
+  [bgColor]="bgColorNotification"
+></notification>
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>

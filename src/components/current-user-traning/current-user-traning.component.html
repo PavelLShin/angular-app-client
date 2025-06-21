@@ -1,0 +1,58 @@
+<main class="main" *ngIf="exerciseDayData">
+  <h2>{{ exerciseDayData.tittle }}</h2>
+  <div
+    *ngIf="startTraning && activeTraningId == exerciseDayId"
+    class="exercise-content-container"
+  >
+    <section class="exercise-container-slider">
+      <div class="exercise-configuration-container">
+        <div
+          *ngFor="let exercise of exerciseUser; let i = index"
+          class="exercise-item"
+          [style.transform]="'translateY(-' + currentExerciseIndex * 100 + '%)'"
+          (click)="
+            exerciseCurrentRoute(
+              exercise.userExerciseDayId,
+              exercise.exerciseId
+            )
+          "
+        >
+          <h2>{{ exercise.name }}</h2>
+        </div>
+      </div>
+    </section>
+    <div class="exercise-navigation">
+      <div class="next" (click)="nextExercises()">❯</div>
+      <div class="prev" (click)="prevExercises()">❮</div>
+    </div>
+  </div>
+  <div class="btn-control">
+    <button *ngIf="!startTraning" class="start_btn" (click)="onStartTraning()">
+      Начать
+    </button>
+    <button
+      *ngIf="startTraning && activeTraningId == exerciseDayId"
+      class="end_btn"
+      (click)="onEndTraning()"
+    >
+      Завершить
+    </button>
+    <div
+      *ngIf="startTraning && activeTraningId != exerciseDayId"
+      class="disclamer_container"
+    >
+      <h2>
+        Уже есть активная тренировка, перед стартом следующей, завершите её
+      </h2>
+      <button class="start_btn" (click)="onActiveTraning()">Перейти</button>
+    </div>
+  </div>
+</main>
+
+<notification
+  [message]="errorMessage"
+  [bgColor]="bgColorNotification"
+></notification>
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>

@@ -1,0 +1,12 @@
+.timer-container {
+  position: absolute;
+  top: 10%;
+  left: 90%;
+  width: 120px;
+  height: 30px;
+  color: white;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

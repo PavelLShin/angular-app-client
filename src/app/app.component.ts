@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
 import { AuthenticateService } from 'src/services/authenticate/authenticate.service';
 import { DialogStateService } from 'src/services/dialog/dialog-state.service';
@@ -13,10 +14,13 @@ export class AppComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     public authService: AuthService,
     public authenticateService: AuthenticateService,
-    public dialogService: DialogStateService
+    public dialogService: DialogStateService,
+    public route: Router
   ) {}
   public login: boolean = false;
   public isDialogOpen!: boolean;
+  public bgColorNotification!: string;
+  public errorMessage: string = '';
 
   title = 'athletic-app';
 
@@ -37,7 +41,16 @@ export class AppComponent implements OnInit {
   }
 
   logout(): void {
-    this.authenticateService.logout();
-    this.authService.logout();
+    if (localStorage.getItem('traningDay')) {
+      this.errorMessage = 'Завершите активную тренировку';
+      this.bgColorNotification = 'error';
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 3000);
+    } else {
+      this.authenticateService.logout();
+      this.authService.logout();
+      this.route.navigate([`auth`]);
+    }
   }
 }

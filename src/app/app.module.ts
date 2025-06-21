@@ -17,8 +17,13 @@ import { DeleteExercisesDialogModule } from 'src/components/delete-exercises-dia
 import { ExerciseInfoModule } from 'src/components/exercise-info/exercise-info.module';
 import { UserExerciseModule } from 'src/components/user-exercise/user-exercise.module';
 import { UserExerciseInfoModule } from 'src/components/user-exercise-info/user-exercise-info.module';
-import { UserExerciseSettingsComponent } from '../components/user-exercise-settings/user-exercise-settings.component';
 import { UserExerciseSettingsModule } from 'src/components/user-exercise-settings/user-exercise-settings.module';
+import { StartUserTraningModule } from 'src/components/start-user-traning/start-user-traning.module';
+import { CurrentUserTraningModule } from 'src/components/current-user-traning/current-user-traning.module';
+import { CurrentUserExerciseModule } from 'src/components/current-user-exercise/current-user-exercise.module';
+import { NotificationModule } from 'src/components/notofication/notification.module';
+import { TimerTraningModule } from 'src/components/timer-traning/timer-traning.module';
+import { ResultTraningModule } from 'src/components/result-traning/result-traning.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +46,12 @@ import { UserExerciseSettingsModule } from 'src/components/user-exercise-setting
     UserExerciseModule,
     UserExerciseInfoModule,
     UserExerciseSettingsModule,
+    StartUserTraningModule,
+    CurrentUserTraningModule,
+    CurrentUserExerciseModule,
+    NotificationModule,
+    TimerTraningModule,
+    ResultTraningModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

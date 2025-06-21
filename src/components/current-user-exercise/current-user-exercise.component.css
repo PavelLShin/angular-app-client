@@ -1,0 +1,130 @@
+main {
+  margin-top: 5px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+h2 {
+  color: rgb(248, 248, 248);
+  font-size: 30px;
+}
+
+h3 {
+  color: white;
+}
+
+form {
+  width: 500px;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  background-color: rgb(125, 125, 125, 0.2);
+  border: 1px solid rgba(124, 124, 124, 0.159);
+  padding: 0 20px 0 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.input-weigth,
+.input-practice {
+  font-size: 20px;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+}
+
+.btn-submit {
+  background-color: green;
+  color: white;
+}
+
+.valid-border {
+  border: 2px solid green;
+}
+
+.invalid-border {
+  border: 2px solid red;
+}
+
+.sets-container {
+  width: 500px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 0 20px 0 20px;
+}
+
+.set-item-container {
+  width: 500px;
+  border-radius: 10px;
+  background-color: rgb(125, 125, 125, 0.2);
+  border: 1px solid rgba(124, 124, 124, 0.159);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 40px;
+}
+
+.set-item {
+  width: 30px;
+  border-right: 1px solid #cccccc;
+}
+
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 25px;
+}
+
+.save_btn,
+.back_btn {
+  color: rgb(255, 255, 255);
+  width: 150px;
+  background-color: #00bb2c;
+  border: none;
+  height: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.back_btn {
+  background-color: #b80000;
+}
+
+.icon-delete,
+.icon-setting {
+  color: white;
+  cursor: pointer;
+}
+
+.icon-setting:hover {
+  transition: 0.5s all;
+  color: green;
+}
+
+.icon-delete:hover {
+  transition: 0.5s all;
+  color: red;
+}
