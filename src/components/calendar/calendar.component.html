@@ -1,1 +1,36 @@
-<p>calendar works!</p>
+<main class="main">
+  <div class="nav-container">
+    <div class="prev" (click)="changeMonth(-1)">❮</div>
+    <h2>{{ currentMonth }}</h2>
+    <h2>{{ currentYear }}</h2>
+    <div class="next" (click)="changeMonth(1)">❯</div>
+  </div>
+  <div class="month-container">
+    <div
+      *ngFor="let day of daysInMoth"
+      class="day"
+      [ngClass]="{
+        output: day.getDay() == 6 || day.getDay() == 0,
+        today:
+          TODAY.getDate() == day.getDate() &&
+          TODAY.getMonth() == day.getMonth(),
+        lastMonth: date.getMonth() != day.getMonth()
+      }"
+    >
+      <div>{{ day.getDate() }}</div>
+      <div *ngIf="day.tranings" class="day_traning">
+        <div
+          *ngFor="let item of day.tranings"
+          class="day-traning__info"
+          (click)="dayTraningInfo(item.id)"
+        >
+          {{ item.tittle }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loader" *ngIf="loaderVisible">
+    <div class="spinner"></div>
+  </div>
+  <notification [message]="errorMessage"></notification>
+</main>

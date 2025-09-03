@@ -21,6 +21,12 @@ export class UserTraningPracticeService {
     return this.http.get(`${API_URL}/userTraningPractice/${id}`);
   }
 
+  getUserTranings(userProfileId: string | null): Observable<Object> {
+    return this.http.get(
+      `${API_URL}/userTraningPractice/calendar/${userProfileId}`
+    );
+  }
+
   updateUserTraningPractice(data: IUpdatePracticeDayData): Observable<Object> {
     return this.http.patch(`${API_URL}/userTraningPractice`, data);
   }

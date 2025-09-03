@@ -95,6 +95,14 @@ export class HomeComponent implements OnInit {
     this.route.navigate([`start-user-traning/${this.userId}`]);
   }
 
+  onExercise(): void {
+    this.route.navigate([`/exercise`]);
+  }
+
+  onProgress(): void {
+    this.route.navigate([`/progress`]);
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

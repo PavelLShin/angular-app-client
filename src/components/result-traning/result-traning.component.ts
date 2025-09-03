@@ -109,7 +109,7 @@ export class ResultTraningComponent implements OnInit {
   }
 
   goBack(): void {
-    this.route.navigate([`/home`]);
+    this.route.navigate([`/calendar`]);
   }
 
   ngOnDestroy(): void {
