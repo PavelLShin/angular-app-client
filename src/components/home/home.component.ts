@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   getImgPath(): void | string {
-    return `http://${BASE_URL}:5000/${this.userData.img}`;
+    return `${BASE_URL}:5000/${this.userData.img}`;
   }
 
   getUserInfo(id: string | null): void {
