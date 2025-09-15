@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { BASE_URL } from 'src/env/constants';
 import { IUserProfileData } from 'src/interfaces/user_data/IUserProfileData';
 import { UserDataService } from 'src/services/user-data/user-data.service';
 
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   getImgPath(): void | string {
-    return `http://localhost:5000/${this.userData.img}`;
+    return `http://${BASE_URL}:5000/${this.userData.img}`;
   }
 
   getUserInfo(id: string | null): void {
