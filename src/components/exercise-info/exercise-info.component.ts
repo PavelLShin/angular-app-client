@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { BASE_URL } from 'src/env/constants';
 import { IExerciseData } from 'src/interfaces/exercise/IExerciseType';
 import { ExerciseService } from 'src/services/exercise/exercise.service';
 
@@ -26,7 +27,7 @@ export class ExerciseInfoComponent implements OnInit {
   }
 
   getImgPath(): void | string {
-    return `http://localhost:5000/${this.exerciseData.img}`;
+    return `${BASE_URL}:5000/${this.exerciseData.img}`;
   }
 
   getExerciseId(): void {

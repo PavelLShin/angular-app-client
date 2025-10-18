@@ -80,7 +80,7 @@ export class ChangeUserDataComponent implements OnInit {
             setTimeout(() => {
               this.userDataForm.reset();
               this.getUserInfo(this.userId);
-              this.route.navigate(['/home']);
+              this.route.navigate(['']);
               this.errorMessage = '';
             }, 1000);
           },
@@ -107,7 +107,7 @@ export class ChangeUserDataComponent implements OnInit {
               this.errorMessage = '';
               this.userDataForm.reset();
               this.getUserInfo(this.userId);
-              this.route.navigate(['/home']);
+              this.route.navigate(['']);
             }, 1000);
           },
 

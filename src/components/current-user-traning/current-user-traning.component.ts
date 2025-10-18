@@ -142,7 +142,9 @@ export class CurrentUserTraningComponent implements OnInit {
       .subscribe({
         next: () => {
           let currenrtPracticeDay = localStorage.getItem('traningDay');
-          this.route.navigate([`user-traning-details/${currenrtPracticeDay}`]);
+          this.route.navigate([
+            `user-traning-details/${currenrtPracticeDay}/${this.userId}`,
+          ]);
           localStorage.removeItem('traningDay');
         },
         error: (error) => {
@@ -202,7 +204,8 @@ export class CurrentUserTraningComponent implements OnInit {
   }
 
   onStartTraning(): void {
-    this.timerTraningService.start();
+    //  Таймер в разработке
+    // this.timerTraningService.start();
     let data = {
       tittle: this.exerciseDayData.tittle,
       start: new Date().toString(),
@@ -223,7 +226,9 @@ export class CurrentUserTraningComponent implements OnInit {
       ).toString(),
     };
     this.updateUserPracticeDay(data);
-    this.timerTraningService.stop();
+
+    //  Таймер в разработке
+    // this.timerTraningService.stop();
   }
 
   onActiveTraning(): void {

@@ -61,36 +61,6 @@ export class ExerciseComponent implements OnInit {
     this.getExercisesByType(id);
   }
 
-  nextType(): void {
-    if (this.currentTypeIndex < this.exerciseType.length - 1) {
-      this.currentTypeIndex =
-        (this.currentTypeIndex + 1) % this.exerciseType.length;
-    }
-  }
-
-  prevType(): void {
-    if (this.currentTypeIndex > 0) {
-      this.currentTypeIndex =
-        (this.currentTypeIndex - 1 + this.exerciseType.length) %
-        this.exerciseType.length;
-    }
-  }
-
-  nextExercises(): void {
-    if (this.currentExerciseIndex < this.exercises.length - 1) {
-      this.currentExerciseIndex =
-        (this.currentExerciseIndex + 1) % this.exercises.length;
-    }
-  }
-
-  prevExercises(): void {
-    if (this.currentExerciseIndex > 0) {
-      this.currentExerciseIndex =
-        (this.currentExerciseIndex - 1 + this.exercises.length) %
-        this.exercises.length;
-    }
-  }
-
   getUserRole(id: string | null): void {
     this.userDataService
       .getUserById(id)

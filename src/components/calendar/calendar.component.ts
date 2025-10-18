@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { IUserPracticeDay } from 'src/interfaces/user-practice-day/IUserPracticeDay';
@@ -19,9 +19,7 @@ export class CalendarComponent implements OnInit {
 
   public date: Date = new Date();
 
-  // Добавить тип
   public daysInMoth: any[] = [];
-  //
 
   public monthTitle: string[] = [
     'Январь',
@@ -40,19 +38,27 @@ export class CalendarComponent implements OnInit {
 
   public currentMonth!: string;
   public currentYear!: string;
-
+  public pageUserId!: string | null;
   public userProfileId: string | null = localStorage.getItem('id');
 
   public userExercisesData: IUserPracticeDay[] = [];
 
   constructor(
     private userTraningPracticeService: UserTraningPracticeService,
-    public route: Router
+    public route: Router,
+    public activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getUserTranings(this.userProfileId);
+    this.getUserIdInfo();
+    this.getUserTranings(this.pageUserId);
     this.generateCalendar(this.date);
+  }
+
+  getUserIdInfo(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.pageUserId = params.get('userId');
+    });
   }
 
   getUserTranings(id: string | null): void {
@@ -106,7 +112,6 @@ export class CalendarComponent implements OnInit {
     this.markTrainingDays();
   }
 
-  //
   markTrainingDays(): void {
     this.daysInMoth.forEach((day) => {
       day.tranings = [];
@@ -129,7 +134,7 @@ export class CalendarComponent implements OnInit {
   }
 
   dayTraningInfo(id: string): void {
-    this.route.navigate([`user-traning-details/${id}`]);
+    this.route.navigate([`user-traning-details/${id}/${this.pageUserId}`]);
   }
 
   ngOnDestroy(): void {

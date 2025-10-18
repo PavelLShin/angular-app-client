@@ -2,7 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL } from 'src/env/constants';
-import { IUserProfileData } from 'src/interfaces/user_data/IUserProfileData';
+import {
+  ISearchUserResult,
+  IUserProfileData,
+} from 'src/interfaces/user_data/IUserProfileData';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +35,14 @@ export class UserDataService {
 
   changeUserData(data: IUserProfileData | Object) {
     return this.http.patch(`${API_URL}/userData`, data);
+  }
+
+  searchUser(term: string): Observable<ISearchUserResult[]> {
+    if (!term.trim()) {
+      return new Observable((observer) => observer.next([]));
+    }
+    return this.http.get<ISearchUserResult[]>(
+      `${API_URL}/userData/search?q=${term}`
+    );
   }
 }

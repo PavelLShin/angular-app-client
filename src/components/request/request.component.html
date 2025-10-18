@@ -1,0 +1,47 @@
+<main>
+  <div class="request-content__container">
+    <div class="request-slider__container">
+      <section
+        *ngIf="(incomingRequests$ | async)?.length !== 0"
+        class="request-result"
+      >
+        <div
+          *ngFor="let request of incomingRequests$ | async"
+          class="user-card"
+        >
+          <div class="user-data">
+            <img [src]="getImgPath(request.img)" class="user_img" />
+            <h2>{{ request.nickname }}</h2>
+          </div>
+          <div class="user-btn">
+            <button
+              class="accept-request"
+              mat-flat-button
+              (click)="respondToFriendRequest(request.requestId, 'accept')"
+            >
+              Принять
+            </button>
+            <button
+              class="delete-request"
+              mat-flat-button
+              (click)="respondToFriendRequest(request.requestId, 'reject')"
+            >
+              Отклонить
+            </button>
+          </div>
+        </div>
+      </section>
+      <div *ngIf="(incomingRequests$ | async)?.length === 0" class="no-results">
+        <p>Запросов нет 😕</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>
+<notification
+  [message]="errorMessage"
+  [bgColor]="bgColorNotification"
+></notification>

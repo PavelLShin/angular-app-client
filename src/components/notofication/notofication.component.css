@@ -1,21 +1,49 @@
 .notification {
   position: fixed;
-  top: 20px;
+  top: 70px;
   right: 20px;
   color: white;
-  padding: 16px;
-  border-radius: 4px;
-  font-size: 15px;
-  transition: opacity 0.5s ease;
-  width: 200px;
-  min-height: 12px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.4s ease;
+  width: 280px;
   text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1050;
+  transform: translateX(100%);
+  animation: slideIn 0.4s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+  }
 }
 
 .success {
-  background-color: green;
+  background: rgba(46, 125, 50, 0.9);
 }
 
 .error {
-  background-color: red;
+  background: rgba(229, 57, 53, 0.9);
+}
+
+.notification.fade-out {
+  animation: slideOut 0.4s forwards;
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }

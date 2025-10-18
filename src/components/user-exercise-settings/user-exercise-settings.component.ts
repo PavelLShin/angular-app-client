@@ -32,6 +32,8 @@ export class UserExerciseSettingsComponent implements OnInit {
   public colorBorderType!: string;
   public exerciseUser!: IUserExercise[];
 
+  public pageUserId!: string | null;
+
   constructor(
     private userExerciseService: UserExerciseService,
     private userExerciseDayService: UserTraningService,
@@ -41,8 +43,15 @@ export class UserExerciseSettingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getUserIdInfo();
     this.getExerciseType();
     this.getExerciseDayId();
+  }
+
+  getUserIdInfo(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.pageUserId = params.get('userId');
+    });
   }
 
   getUserExercises(userExerciseDayId: string | null): void {
@@ -133,7 +142,9 @@ export class UserExerciseSettingsComponent implements OnInit {
         this.errorMessage = 'Успешно';
         this.bgColorNotification = 'success';
         setTimeout(() => {
-          this.route.navigate([`/user-exercise-info/${this.exerciseDayId}`]);
+          this.route.navigate([
+            `/user-exercise-info/${this.exerciseDayId}/${this.pageUserId}`,
+          ]);
           this.errorMessage = '';
         }, 1000);
       }

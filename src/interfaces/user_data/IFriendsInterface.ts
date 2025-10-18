@@ -1,4 +1,11 @@
-export interface IUserProfileData {
+export interface IFreindsData {
+  id: number;
+  nickname: string | null;
+  img: string | null;
+}
+
+export interface ISearchFriendsInterface {
+  friendStatus: string;
   age: string;
   createdAt: string | null;
   gender: string | null;
@@ -13,12 +20,9 @@ export interface IUserProfileData {
   weight: string | null;
 }
 
-export interface ISearchUserResult extends IUserProfileData {
-  friendStatus:
-    | 'self'
-    | 'friends'
-    | 'i_sent'
-    | 'sent_to_me'
-    | 'none'
-    | 'unknown';
+export interface IRequestIncoming {
+  requestId: number;
+  fromUserId: number;
+  nickname: string;
+  img: string;
 }

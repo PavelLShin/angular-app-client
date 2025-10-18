@@ -19,7 +19,11 @@
   </div>
   <div class="btn-navigation">
     <button class="nav_btn" (click)="onUserTraning()">К тренировкам</button>
-    <button class="nav_btn" (click)="getUserExerciseSettings()">
+    <button
+      class="nav_btn"
+      (click)="getUserExerciseSettings()"
+      *ngIf="pageOwner"
+    >
       Добавить упражнения
     </button>
   </div>

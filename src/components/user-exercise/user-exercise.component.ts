@@ -25,6 +25,8 @@ export class UserExerciseComponent implements OnInit {
   public currentExerciseIndex: number = 0;
   public activeTraningId!: string | null;
 
+  public pageOwner!: boolean;
+
   constructor(
     public route: Router,
     public activatedRoute: ActivatedRoute,
@@ -68,6 +70,9 @@ export class UserExerciseComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
     });
+
+    this.pageOwner =
+      Number(localStorage.getItem('id')) === Number(this.userId) ? true : false;
 
     this.getUserTraning(this.userId);
   }
@@ -172,27 +177,12 @@ export class UserExerciseComponent implements OnInit {
       });
   }
 
-  nextExercises(): void {
-    if (this.currentExerciseIndex < this.userTranings.length - 1) {
-      this.currentExerciseIndex =
-        (this.currentExerciseIndex + 1) % this.userTranings.length;
-    }
-  }
-
-  prevExercises(): void {
-    if (this.currentExerciseIndex > 0) {
-      this.currentExerciseIndex =
-        (this.currentExerciseIndex - 1 + this.userTranings.length) %
-        this.userTranings.length;
-    }
-  }
-
   getUserExerciseInfo(id: number | null): void {
-    this.route.navigate([`user-exercise-info/${id}`]);
+    this.route.navigate([`user-exercise-info/${id}/${this.userId}`]);
   }
 
   getUserExerciseSettings(id: number | null): void {
-    this.route.navigate([`user-exercise-settings/${id}`]);
+    this.route.navigate([`user-exercise-settings/${id}/${this.userId}`]);
   }
 
   ngOnDestroy(): void {

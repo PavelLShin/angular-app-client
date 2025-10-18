@@ -1,0 +1,157 @@
+<main>
+  <div class="friends__container">
+    <h2>Мои друзья</h2>
+    <div class="search-friends-content__container">
+      <section class="search-friends-slider__container">
+        <div class="search-results">
+          <div *ngFor="let friend of friends$ | async" class="user-card">
+            <div class="user-data">
+              <img [src]="getImgPath(friend.img)" class="user_img" />
+              <h2>{{ friend.nickname }}</h2>
+            </div>
+            <div class="friend-btn__container">
+              <button
+                mat-flat-button
+                class="open-friend-calendar"
+                (click)="onUserCalendar(friend.id)"
+              >
+                Календарь
+              </button>
+              <button
+                mat-flat-button
+                class="open-friend-traning"
+                (click)="onUserTraning(friend.id)"
+              >
+                Тренировки
+              </button>
+              <button
+                mat-flat-button
+                class="delete-friend"
+                (click)="removeFriends(friend.id)"
+              >
+                Удалить
+              </button>
+            </div>
+            <div></div>
+          </div>
+          <div *ngIf="(friends$ | async)?.length === 0" class="no-results">
+            <p>Пока нет друзей 😕</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="search-friends__container">
+    <form [formGroup]="searchFriendsForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input
+          class="text-input"
+          formControlName="nickname"
+          required
+          [ngClass]="{
+            'valid-border':
+              searchFriendsForm.get('nickname')?.valid &&
+              searchFriendsForm.get('nickname')?.touched,
+            'invalid-border':
+              searchFriendsForm.get('nickname')?.invalid &&
+              searchFriendsForm.get('nickname')?.touched
+          }"
+          placeholder="Введите никнейм"
+        />
+      </div>
+    </form>
+    <div class="search-friends-content__container">
+      <section class="search-friends-slider__container">
+        <div class="search-results">
+          <div *ngFor="let user of searchResults$ | async" class="user-card">
+            <div class="user-info">
+              <img [src]="getImgPath(user.img)" class="user_img" />
+              <h3>{{ user.name }} {{ user.surname }}</h3>
+              <h2>@{{ user.nickname }}</h2>
+              <p>Возраст: {{ getFullYear(user.age) }}</p>
+              <p>Пол: {{ user.gender === "male" ? "Мужской" : "Женский" }}</p>
+            </div>
+            <div
+              *ngIf="user.friendStatus === 'self'"
+              class="no-friend-btn__container"
+            >
+              <button mat-flat-button class="no-open">Это Вы</button>
+            </div>
+            <div
+              *ngIf="user.friendStatus === 'friends'"
+              class="friend-btn__container"
+            >
+              <button
+                mat-flat-button
+                class="open-friend-calendar"
+                (click)="onUserCalendar(user.userId)"
+              >
+                Календарь
+              </button>
+              <button
+                mat-flat-button
+                class="open-friend-traning"
+                (click)="onUserTraning(user.userId)"
+              >
+                Тренировки
+              </button>
+              <button
+                mat-flat-button
+                class="delete-friend"
+                (click)="removeFriends(user.userId)"
+              >
+                Удалить
+              </button>
+            </div>
+            <div
+              *ngIf="user.friendStatus === 'i_sent'"
+              class="no-friend-btn__container"
+            >
+              <button mat-flat-button class="request-pending">
+                Запрос отправлен
+              </button>
+            </div>
+            <div
+              *ngIf="user.friendStatus === 'sent_to_me'"
+              class="no-friend-btn__container"
+            >
+              <button
+                (click)="goRequestList()"
+                mat-flat-button
+                class="incoming-request"
+              >
+                Входящий запрос
+              </button>
+            </div>
+            <div
+              *ngIf="user.friendStatus === 'none'"
+              class="no-friend-btn__container"
+            >
+              <button
+                mat-flat-button
+                class="start-request"
+                (click)="sendFriendsRequest(user.userId)"
+              >
+                Добавить в друзья
+              </button>
+            </div>
+          </div>
+          <div
+            *ngIf="(searchResults$ | async)?.length === 0"
+            class="no-results"
+          >
+            <p>Пользователи не найдены 😕</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>
+<notification
+  [message]="errorMessage"
+  [bgColor]="bgColorNotification"
+></notification>

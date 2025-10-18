@@ -1,4 +1,5 @@
 <body>
+  <div *ngIf="!login" class="header"></div>
   <header *ngIf="login" [ngClass]="{ 'block-background': isDialogOpen }">
     <div class="logo-container">
       <img
@@ -10,10 +11,21 @@
     <nav>
       <ul class="nav-list">
         <li>
-          <a routerLink="/home" routerLinkActive="active-link">Мой дом</a>
+          <a
+            routerLink=""
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Главная</a
+          >
         </li>
         <li>
-          <a routerLink="/calendar" routerLinkActive="active-link">Календарь</a>
+          <a routerLink="/friends" routerLinkActive="active-link">Друзья</a>
+        </li>
+        <li>
+          <a routerLink="/request" routerLinkActive="active-link">Запросы</a>
+          <span *ngIf="incomingRequestsCount > 0" class="badge">
+            {{ incomingRequestsCount }}
+          </span>
         </li>
       </ul>
     </nav>
@@ -21,7 +33,9 @@
       <a>Выход</a>
     </div>
   </header>
-  <router-outlet></router-outlet>
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
 </body>
 
 <app-timer-traning></app-timer-traning>

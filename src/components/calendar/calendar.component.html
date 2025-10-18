@@ -29,8 +29,9 @@
       </div>
     </div>
   </div>
-  <div class="loader" *ngIf="loaderVisible">
-    <div class="spinner"></div>
-  </div>
-  <notification [message]="errorMessage"></notification>
 </main>
+
+<div class="loader" *ngIf="loaderVisible">
+  <div class="spinner"></div>
+</div>
+<notification [message]="errorMessage"></notification>

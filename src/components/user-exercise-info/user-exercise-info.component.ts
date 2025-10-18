@@ -23,6 +23,9 @@ export class UserExerciseInfoComponent implements OnInit {
   public currentExerciseIndex: number = 0;
   public userId!: string | null;
 
+  public pageOwner!: boolean;
+  public pageUserId!: string | null;
+
   constructor(
     public route: Router,
     private userExerciseDayService: UserTraningService,
@@ -33,6 +36,18 @@ export class UserExerciseInfoComponent implements OnInit {
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
     this.getExerciseDayId();
+    this.getUserIdInfo();
+  }
+
+  getUserIdInfo(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.pageUserId = params.get('userId');
+    });
+
+    this.pageOwner =
+      Number(localStorage.getItem('id')) === Number(this.pageUserId)
+        ? true
+        : false;
   }
 
   getExerciseDayId(): void {
@@ -62,7 +77,7 @@ export class UserExerciseInfoComponent implements OnInit {
       });
   }
 
-  getUserTraningDay(id: any): void {
+  getUserTraningDay(id: string | null): void {
     this.loaderVisible = true;
     this.userExerciseDayService
       .getOneUserTraning(id)
@@ -98,11 +113,17 @@ export class UserExerciseInfoComponent implements OnInit {
   }
 
   getUserExerciseSettings(): void {
-    this.route.navigate([`user-exercise-settings//${this.exerciseDayId}`]);
+    this.route.navigate([
+      `user-exercise-settings/${this.exerciseDayId}/${this.userId}`,
+    ]);
   }
 
   onUserTraning(): void {
-    this.route.navigate([`user-traning/${this.userId}`]);
+    if (this.pageOwner) {
+      this.route.navigate([`user-traning/${this.userId}`]);
+    } else {
+      this.route.navigate([`user-traning/${this.pageUserId}`]);
+    }
   }
 
   ngOnDestroy(): void {

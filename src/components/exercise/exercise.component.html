@@ -18,10 +18,6 @@
         </div>
       </div>
     </section>
-    <div class="type-navigation">
-      <div class="next" (click)="nextType()">❯</div>
-      <div class="prev" (click)="prevType()">❮</div>
-    </div>
     <button
       *ngIf="userRole == 'ADMIN'"
       class="change-user-data_btn"
@@ -64,10 +60,6 @@
         </div>
       </div>
     </section>
-    <div class="exercise-navigation">
-      <div class="next" (click)="nextExercises()">❯</div>
-      <div class="prev" (click)="prevExercises()">❮</div>
-    </div>
   </div>
   <div class="loader" *ngIf="loaderVisible">
     <div class="spinner"></div>

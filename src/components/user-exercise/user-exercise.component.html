@@ -1,5 +1,5 @@
 <main class="main">
-  <section class="set-traning-container">
+  <section class="set-traning-container" *ngIf="pageOwner">
     <h2>Создать тренировку</h2>
     <form [formGroup]="createUserTraningForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -35,6 +35,7 @@
     </form>
   </section>
   <div class="exercise-content-container">
+    <h1 *ngIf="!pageOwner">Тренировки друга</h1>
     <section class="exercise-container-slider">
       <div class="exercise-configuration-container">
         <div
@@ -50,12 +51,14 @@
               >info</span
             >
             <span
+              *ngIf="pageOwner"
               class="material-icons icon-settings"
               (click)="getUserExerciseSettings(traning.id)"
             >
               settings
             </span>
             <span
+              *ngIf="pageOwner"
               class="material-icons"
               (click)="deleteUserTraning(traning.id)"
             >
@@ -65,10 +68,6 @@
         </div>
       </div>
     </section>
-    <div class="exercise-navigation">
-      <div class="next" (click)="nextExercises()">❯</div>
-      <div class="prev" (click)="prevExercises()">❮</div>
-    </div>
   </div>
 </main>
 

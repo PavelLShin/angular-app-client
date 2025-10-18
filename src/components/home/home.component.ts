@@ -100,8 +100,8 @@ export class HomeComponent implements OnInit {
     this.route.navigate([`/exercise`]);
   }
 
-  onProgress(): void {
-    this.route.navigate([`/progress`]);
+  onCalendar(): void {
+    this.route.navigate([`/calendar/${this.userId}`]);
   }
 
   ngOnDestroy(): void {

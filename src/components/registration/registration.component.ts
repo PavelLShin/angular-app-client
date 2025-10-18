@@ -69,11 +69,8 @@ export class RegistrationComponent implements OnInit {
           })
         )
         .subscribe({
-          next: (tokens: ITokenData) => {
-            localStorage.setItem('id', tokens.id);
-            localStorage.setItem('token', tokens.token);
-            this.route.navigate(['/home']);
-            this.authenticateService.login();
+          next: () => {
+            this.route.navigate(['/auth']);
           },
           error: (error) => {
             this.registerForm.reset();
@@ -101,7 +98,7 @@ export class RegistrationComponent implements OnInit {
           next: (tokens: ITokenData) => {
             localStorage.setItem('id', tokens.id);
             localStorage.setItem('token', tokens.token);
-            this.route.navigate(['/home']);
+            this.route.navigate(['']);
             this.authenticateService.login();
           },
           error: (error) => {

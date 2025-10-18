@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'src/components/home/home.component';
 import { ExerciseComponent } from 'src/components/exercise/exercise.component';
-import { ProgressComponent } from 'src/components/progress/progress.component';
 import { CalendarComponent } from 'src/components/calendar/calendar.component';
 import { RegistrationComponent } from 'src/components/registration/registration.component';
 import { AuthGuard } from 'src/guards/AuthGuard';
@@ -20,9 +19,11 @@ import { StartUserTraningComponent } from 'src/components/start-user-traning/sta
 import { CurrentUserTraningComponent } from 'src/components/current-user-traning/current-user-traning.component';
 import { CurrentUserExerciseComponent } from 'src/components/current-user-exercise/current-user-exercise.component';
 import { ResultTraningComponent } from 'src/components/result-traning/result-traning.component';
+import { FriendsComponent } from 'src/components/friends/friends.component';
+import { RequestComponent } from 'src/components/request/request.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'change-user-data',
     component: ChangeUserDataComponent,
@@ -35,11 +36,16 @@ const routes: Routes = [
   },
 
   { path: 'exercise', component: ExerciseComponent, canActivate: [AuthGuard] },
-  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
-  { path: 'progress', component: ProgressComponent, canActivate: [AuthGuard] },
+  {
+    path: 'calendar/:userId',
+    component: CalendarComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'configurable', component: TypeConfigurableComponent },
+  { path: 'friends', component: FriendsComponent },
+  { path: 'request', component: RequestComponent },
   {
     path: 'exercise-configuration/:id',
     component: ExerciseConfigurationComponent,
@@ -49,11 +55,11 @@ const routes: Routes = [
     component: ExerciseInfoComponent,
   },
   {
-    path: 'user-exercise-info/:id',
+    path: 'user-exercise-info/:id/:userId',
     component: UserExerciseInfoComponent,
   },
   {
-    path: 'user-exercise-settings/:id',
+    path: 'user-exercise-settings/:id/:userId',
     component: UserExerciseSettingsComponent,
   },
   { path: 'user-traning/:id', component: UserExerciseComponent },
@@ -68,7 +74,7 @@ const routes: Routes = [
     component: CurrentUserExerciseComponent,
   },
   {
-    path: `user-traning-details/:currentPracticeDay`,
+    path: `user-traning-details/:currentPracticeDay/:userId`,
     component: ResultTraningComponent,
   },
   { path: '**', component: RegistrationComponent },

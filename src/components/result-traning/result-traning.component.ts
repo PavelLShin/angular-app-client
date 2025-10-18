@@ -20,6 +20,7 @@ export class ResultTraningComponent implements OnInit {
   public currentUserPracticeData!: IUserPracticeDayData;
   public userExerciseDayId!: string | null;
   public userExerciseDayData!: IUserExerciseDay[];
+  public pageUserId!: string | null;
 
   constructor(
     private userTraningPracticeService: UserTraningPracticeService,
@@ -29,9 +30,16 @@ export class ResultTraningComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getUserIdInfo();
     this.activatedRoute.paramMap.subscribe((params) => {
       this.currentPracticeDayId = params.get('currentPracticeDay');
       this.getCurrentTraningData(this.currentPracticeDayId);
+    });
+  }
+
+  getUserIdInfo(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.pageUserId = params.get('userId');
     });
   }
 
@@ -109,7 +117,7 @@ export class ResultTraningComponent implements OnInit {
   }
 
   goBack(): void {
-    this.route.navigate([`/calendar`]);
+    this.route.navigate([`/calendar/${this.pageUserId}`]);
   }
 
   ngOnDestroy(): void {

@@ -5,7 +5,6 @@ import { HomeModule } from 'src/components/home/home.module';
 import { ExerciseModule } from 'src/components/exercise/exercise.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarModule } from 'src/components/calendar/calendar.module';
-import { ProgressModule } from 'src/components/progress/progress.module';
 import { RegistrationModule } from 'src/components/registration/registration.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ChangeUserDataModule } from 'src/components/change-user-data/change-user-data.module';
@@ -24,16 +23,18 @@ import { CurrentUserExerciseModule } from 'src/components/current-user-exercise/
 import { NotificationModule } from 'src/components/notofication/notification.module';
 import { TimerTraningModule } from 'src/components/timer-traning/timer-traning.module';
 import { ResultTraningModule } from 'src/components/result-traning/result-traning.module';
+import { FriendsModule } from 'src/components/friends/friends.module';
+import { RequestModule } from 'src/components/request/request.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    FriendsModule,
     BrowserModule,
     HomeModule,
     ExerciseModule,
     CalendarModule,
     AppRoutingModule,
-    ProgressModule,
     RegistrationModule,
     HttpClientModule,
     ChangeUserDataModule,
@@ -52,6 +53,7 @@ import { ResultTraningModule } from 'src/components/result-traning/result-tranin
     NotificationModule,
     TimerTraningModule,
     ResultTraningModule,
+    RequestModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

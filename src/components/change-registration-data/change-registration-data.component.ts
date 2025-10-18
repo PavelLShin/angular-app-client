@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -82,7 +82,7 @@ export class ChangeRegistrationDataComponent implements OnInit {
           this.bgColorNotification = 'success';
           setTimeout(() => {
             this.errorMessage = '';
-            this.route.navigate(['/home']);
+            this.route.navigate(['']);
           }, 1000);
         },
         error: (error) => {

@@ -1,50 +1,126 @@
 main {
   margin-top: 5px;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 24px;
+  background-color: #1e1e1e;
 }
 
 h2 {
-  color: rgb(140, 140, 140);
-  font-size: 30px;
+  color: #ccc;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .exercise-info-container {
   width: 100%;
-  height: 80%;
+  max-width: 1000px;
+  height: auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .exercise-card-header {
-  height: 100%;
-  width: 50%;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 400px;
 }
 
 .exercise_img {
-  width: 400px;
-  height: 400px;
-  border-radius: 15%;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.exercise_img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
 }
 
 .exercise-card-info {
-  width: 30%;
-  height: 400px;
-  border-radius: 15%;
+  flex: 1;
+  min-height: 400px;
+  padding: 24px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 20px;
-  opacity: 0.9;
-  background-color: rgb(100, 100, 100);
+  background: rgba(40, 40, 40, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.exercise-card-info h3 {
+  color: #f0f0f0;
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .exercise-info-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .exercise-card-info {
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .exercise-card-info h3 {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #ffb700;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

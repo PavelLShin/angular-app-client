@@ -1,87 +1,164 @@
 h1 {
-  color: rgb(95, 95, 95);
+  color: #ccc;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
+
 .set-user-info {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-}
-form {
-  margin: 20px 0;
-  width: 400px;
-  min-height: 300px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+  color: #f0f0f0;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
 }
 
-.form-group {
+form {
+  margin: 30px 0;
+  width: 100%;
+  max-width: 450px;
+  min-height: 320px;
+  background: rgba(25, 25, 25, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  width: 350px;
-  height: 100px;
+  gap: 24px;
+  padding: 30px 20px;
 }
-.form-group__file {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  width: 350px;
-  height: 100px;
-  font-size: 20px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
+.form-group,
+.form-group__file,
 .form-group__raw {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  width: 350px;
-  height: 100px;
-  font-size: 20px;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  gap: 8px;
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 10px;
+}
+
+.form-group__file {
+  gap: 20px;
+  height: auto;
+  padding: 20px;
+  font-size: 18px;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: rgba(30, 30, 30, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-group__file:hover {
+  border-color: #ffb700;
+  background: rgba(40, 40, 40, 0.7);
+}
+
+.form-group__raw {
+  height: auto;
+  padding: 16px 0;
+  font-size: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.mat-form-field-flex,
+.ng-tns-c97-0 {
+  width: 105% !important;
 }
 
 .date-input-container {
-  font-size: 20px;
+  font-size: 18px;
   width: 90%;
 }
 
 .text-input {
-  width: 320px;
-  height: 60px;
-  border-radius: 5px;
-  font-size: 20px;
-  padding: 5px;
+  width: 100%;
+  max-width: 320px;
+  height: 52px;
+  padding: 0 16px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: white;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.text-input:focus {
+  border-color: #ffb700;
+  box-shadow: 0 0 0 2px rgba(255, 183, 0, 0.2);
 }
 
 .error {
-  color: red;
-  font-size: 12px;
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 4px;
 }
-.warn-msg {
-  font-size: 20px;
 
-  color: rgb(32, 129, 0);
+.warn-msg {
+  font-size: 18px;
+  color: #4caf50;
+  text-align: center;
+  margin-top: 8px;
 }
 
 .btn-submit {
-  background-color: rgb(0, 147, 0);
-  border: 1px solid gray;
-  border-radius: 5px;
-  color: rgb(250, 250, 250);
+  width: 170px;
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(to bottom, #2e7d32, #1b5e20);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-submit:hover {
+  background: linear-gradient(to bottom, #388e3c, #2e7d32);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 480px) {
+  .set-user-info {
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  form {
+    padding: 24px 16px;
+    gap: 20px;
+  }
+
+  .text-input {
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
+  }
 }
