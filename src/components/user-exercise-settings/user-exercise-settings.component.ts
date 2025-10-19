@@ -30,6 +30,7 @@ export class UserExerciseSettingsComponent implements OnInit {
   public currentExerciseIndex: number = 0;
   public typeId!: number;
   public colorBorderType!: string;
+  public isSaving: boolean = false;
   public exerciseUser!: IUserExercise[];
 
   public pageUserId!: string | null;
@@ -129,28 +130,45 @@ export class UserExerciseSettingsComponent implements OnInit {
         this.loaderVisible = false;
       });
   }
+  async save(): Promise<void> {
+    if (this.isSaving || !this.exerciseDayId) return;
+    this.isSaving = true;
+    this.loaderVisible = true;
+    this.errorMessage = '';
+    this.bgColorNotification = '';
 
-  async save() {
     try {
-      await this.deleteUserExercise(this.exerciseDayId);
+      await this.userExerciseService
+        .deleteUserExercises(this.exerciseDayId)
+        .toPromise();
+
       for (const el of this.exerciseUser) {
-        await this.createUserExercise(
-          el.name,
-          el.userExerciseDayId,
-          el.exerciseId
-        );
-        this.errorMessage = 'Успешно';
-        this.bgColorNotification = 'success';
-        setTimeout(() => {
-          this.route.navigate([
-            `/user-exercise-info/${this.exerciseDayId}/${this.pageUserId}`,
-          ]);
-          this.errorMessage = '';
-        }, 1000);
+        await this.userExerciseService
+          .createUserExercise({
+            name: el.name,
+            userExerciseDayId: el.userExerciseDayId,
+            exerciseId: el.exerciseId,
+          })
+          .toPromise();
       }
-    } catch (error) {
-      this.errorMessage = 'Ошибка при сохранении данных';
+
+      this.errorMessage = 'Успешно';
+      this.bgColorNotification = 'success';
+
+      setTimeout(() => {
+        this.route.navigate([
+          `/user-exercise-info/${this.exerciseDayId}/${this.pageUserId}`,
+        ]);
+        this.isSaving = false;
+        this.loaderVisible = false;
+        this.errorMessage = '';
+      }, 1000);
+    } catch (error: any) {
+      const message = error?.error?.message || 'Ошибка при сохранении данных';
+      this.errorMessage = message;
       this.bgColorNotification = 'error';
+      this.isSaving = false;
+      this.loaderVisible = false;
     }
   }
 
@@ -193,36 +211,6 @@ export class UserExerciseSettingsComponent implements OnInit {
     this.colorBorderType = color;
     this.typeId = id;
     this.getExercisesByType(id);
-  }
-
-  nextType(): void {
-    if (this.currentTypeIndex < this.exerciseType.length - 1) {
-      this.currentTypeIndex =
-        (this.currentTypeIndex + 1) % this.exerciseType.length;
-    }
-  }
-
-  prevType(): void {
-    if (this.currentTypeIndex > 0) {
-      this.currentTypeIndex =
-        (this.currentTypeIndex - 1 + this.exerciseType.length) %
-        this.exerciseType.length;
-    }
-  }
-
-  nextExercises(): void {
-    if (this.currentExerciseIndex < this.exercises.length - 1) {
-      this.currentExerciseIndex =
-        (this.currentExerciseIndex + 1) % this.exercises.length;
-    }
-  }
-
-  prevExercises(): void {
-    if (this.currentExerciseIndex > 0) {
-      this.currentExerciseIndex =
-        (this.currentExerciseIndex - 1 + this.exercises.length) %
-        this.exercises.length;
-    }
   }
 
   getExerciseType(): void {

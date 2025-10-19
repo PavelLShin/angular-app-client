@@ -104,7 +104,10 @@ export class RegistrationComponent implements OnInit {
           error: (error) => {
             this.registerForm.reset();
             this.bgColorNotification = 'error';
-            this.errorMessage = error.error.message;
+            this.errorMessage =
+              error.error.message == 'Указан не верный пароль'
+                ? 'Указан неверный пароль'
+                : error.error.message;
             setTimeout(() => {
               this.errorMessage = '';
             }, 3000);
